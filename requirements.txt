@@ -4,3 +4,4 @@ torch
 torchtext
 typed-argument-parser
 PyYAML
+torchdata

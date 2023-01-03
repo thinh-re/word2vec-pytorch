@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 
 import torch
 import torch.nn as nn
@@ -11,7 +12,7 @@ from utils.helper import (get_lr_scheduler, get_model_class,
 from utils.trainer import Trainer
 
 
-def train(config):
+def train(config: Dict):
     os.makedirs(config["model_dir"])
     
     train_dataloader, vocab = get_dataloader_and_vocab(
