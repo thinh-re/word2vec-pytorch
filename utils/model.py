@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch import Tensor, nn
 
 from utils.constants import EMBED_DIMENSION, EMBED_MAX_NORM
 
@@ -20,8 +20,8 @@ class CBOW_Model(nn.Module):
             out_features=vocab_size,
         )
 
-    def forward(self, inputs_):
-        x = self.embeddings(inputs_)
+    def forward(self, inputs_: Tensor) -> Tensor:
+        x: Tensor = self.embeddings(inputs_)
         x = x.mean(axis=1)
         x = self.linear(x)
         return x
@@ -44,7 +44,7 @@ class SkipGram_Model(nn.Module):
             out_features=vocab_size,
         )
 
-    def forward(self, inputs_):
+    def forward(self, inputs_: Tensor) -> Tensor:
         x = self.embeddings(inputs_)
         x = self.linear(x)
         return x

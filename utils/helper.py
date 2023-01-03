@@ -1,15 +1,16 @@
 import os
+from typing import Union
 
 import torch
 import torch.optim as optim
 import yaml
-from torch.optim.optimizer import Optimizer
 from torch.optim.lr_scheduler import LambdaLR
+from torch.optim.optimizer import Optimizer
 
 from utils.model import CBOW_Model, SkipGram_Model
 
 
-def get_model_class(model_name: str):
+def get_model_class(model_name: str) -> Union[CBOW_Model, SkipGram_Model]:
     if model_name == "cbow":
         return CBOW_Model
     elif model_name == "skipgram":

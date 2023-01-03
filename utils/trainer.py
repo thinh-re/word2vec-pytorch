@@ -1,8 +1,12 @@
 import json
 import os
+from typing import Union
 
 import numpy as np
 import torch
+from torch.utils.data import DataLoader
+
+from .model import CBOW_Model, SkipGram_Model
 
 
 class Trainer:
@@ -10,12 +14,12 @@ class Trainer:
     
     def __init__(
         self,
-        model,
-        epochs,
-        train_dataloader,
-        train_steps,
-        val_dataloader,
-        val_steps,
+        model: Union[CBOW_Model, SkipGram_Model],
+        epochs: int,
+        train_dataloader: DataLoader,
+        train_steps: int,
+        val_dataloader: DataLoader,
+        val_steps: int,
         checkpoint_frequency,
         criterion,
         optimizer,

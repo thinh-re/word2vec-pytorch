@@ -1,17 +1,15 @@
-import torch
 from functools import partial
+from typing import Any, Tuple
+
+import torch
 from torch.utils.data import DataLoader
 from torchtext.data import to_map_style_dataset
 from torchtext.data.utils import get_tokenizer
-from torchtext.vocab import build_vocab_from_iterator
 from torchtext.datasets import WikiText2, WikiText103
+from torchtext.vocab import build_vocab_from_iterator
 
-from utils.constants import (
-    CBOW_N_WORDS,
-    SKIPGRAM_N_WORDS,
-    MIN_WORD_FREQUENCY,
-    MAX_SEQUENCE_LENGTH,
-)
+from utils.constants import (CBOW_N_WORDS, MAX_SEQUENCE_LENGTH,
+                             MIN_WORD_FREQUENCY, SKIPGRAM_N_WORDS)
 
 
 def get_english_tokenizer():
@@ -121,9 +119,9 @@ def collate_skipgram(batch, text_pipeline):
 
 
 def get_dataloader_and_vocab(
-    model_name, ds_name, ds_type, data_dir, batch_size, shuffle, vocab=None
-):
-
+    model_name, ds_name, ds_type, 
+    data_dir, batch_size, shuffle, vocab=None
+) -> Tuple[DataLoader, Any]:
     data_iter = get_data_iterator(ds_name, ds_type, data_dir)
     tokenizer = get_english_tokenizer()
 
