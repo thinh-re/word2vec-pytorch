@@ -1,4 +1,5 @@
 import os
+import shutil
 from typing import Dict
 
 import torch
@@ -13,6 +14,7 @@ from utils.trainer import Trainer
 
 
 def train(config: Dict):
+    shutil.rmtree(config["model_dir"], ignore_errors=True)
     os.makedirs(config["model_dir"])
     
     train_dataloader, vocab = get_dataloader_and_vocab(
