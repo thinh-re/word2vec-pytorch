@@ -1,9 +1,9 @@
 model_name: cbow
 
-dataset: WikiText2
+dataset: WikiText103
 data_dir: data/
-train_batch_size: 96
-val_batch_size: 96
+train_batch_size: 60
+val_batch_size: 60
 shuffle: True
 
 optimizer: Adam
@@ -13,4 +13,4 @@ train_steps:
 val_steps: 
 
 checkpoint_frequency: 
-model_dir: weights/cbow_WikiText2_2
+model_dir: weights/cbow_WikiText103

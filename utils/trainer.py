@@ -1,6 +1,7 @@
-import os
-import numpy as np
 import json
+import os
+
+import numpy as np
 import torch
 
 
@@ -100,7 +101,7 @@ class Trainer:
         epoch_loss = np.mean(running_loss)
         self.loss["val"].append(epoch_loss)
 
-    def _save_checkpoint(self, epoch):
+    def _save_checkpoint(self, epoch: int):
         """Save model checkpoint to `self.model_dir` directory"""
         epoch_num = epoch + 1
         if epoch_num % self.checkpoint_frequency == 0:
