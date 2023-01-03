@@ -1,18 +1,15 @@
 import argparse
-import yaml
 import os
+
 import torch
 import torch.nn as nn
+import yaml
+from tap import Tap
 
 from utils.dataloader import get_dataloader_and_vocab
+from utils.helper import (get_lr_scheduler, get_model_class,
+                          get_optimizer_class, save_config, save_vocab)
 from utils.trainer import Trainer
-from utils.helper import (
-    get_model_class,
-    get_optimizer_class,
-    get_lr_scheduler,
-    save_config,
-    save_vocab,
-)
 
 
 def train(config):
@@ -76,12 +73,12 @@ def train(config):
     save_config(config, config["model_dir"])
     print("Model artifacts saved to folder:", config["model_dir"])
     
+class TrainArgumentParser(Tap):
+    config: str # path to yaml config
     
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, required=True, help='path to yaml config')
-    args = parser.parse_args()
+    args = TrainArgumentParser().parse_args()
     
-    with open(args.config, 'r') as stream:
-        config = yaml.safe_load(stream)
+    with open(args.config, 'r') as f:
+        config = yaml.safe_load(f)
     train(config)
